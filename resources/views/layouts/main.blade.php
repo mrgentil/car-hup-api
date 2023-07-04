@@ -29,6 +29,7 @@
     <link rel="stylesheet" href="{{asset('css/jquery-ui.css')}}">
     <link rel="stylesheet" href="{{asset('css/flag-icon.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    <link rel="stylesheet" href="{{ asset('vendor/sweetalert2/sweetalert2.min.css') }}">
 </head>
 <body class="section-bg">
 <!-- start cssload-loader -->
@@ -215,6 +216,8 @@
 <!-- end scroll top -->
 
 <!-- Template JS Files -->
+@include('sweetalert::alert')
+<script src="{{ asset('vendor/sweetalert2/sweetalert2.min.js') }}"></script>
 <script src="{{asset('js/jquery-3.4.1.min.js')}}"></script>
 <script src="{{asset('js/jquery-ui.js')}}"></script>
 <script src="{{asset('js/popper.min.js')}}"></script>

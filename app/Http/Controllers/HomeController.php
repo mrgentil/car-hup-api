@@ -25,6 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        //dd(auth()->user()->role->name);
         setlocale(LC_TIME, 'fr_FR');
         $user = auth()->user();
         $inscriptionDate = Carbon::parse($user->created_at);
