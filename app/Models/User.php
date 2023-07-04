@@ -11,8 +11,9 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Mail;
 use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use Carbon\Carbon;
 
-class  User extends Authenticatable implements JWTSubject, MustVerifyEmail
+class  User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -32,6 +33,8 @@ class  User extends Authenticatable implements JWTSubject, MustVerifyEmail
         'avatar',
         'password',
     ];
+
+
 
     public function getJWTIdentifier()
     {
@@ -63,14 +66,17 @@ class  User extends Authenticatable implements JWTSubject, MustVerifyEmail
         'password' => 'hashed',
     ];
 
-    public function roles(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+
+
+    public function role(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsToMany(Role::class);
+        return $this->belongsTo(Role::class);
     }
 
-    public function subscriptions(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function subscription(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsToMany(Subscription::class);
+        return $this->belongsTo(Subscription::class);
     }
+
 
 }
