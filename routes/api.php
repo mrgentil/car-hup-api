@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 //    return $request->user();
 //});
 
-Route::post('login', [AuthController::class, 'login']);
+
 
 
 Route::middleware(['auth:sanctum', 'isConnected'])->group(function () {
@@ -34,22 +34,16 @@ Route::middleware(['auth:sanctum', 'isConnected'])->group(function () {
 
 Route::middleware(['auth:sanctum'])->group(function () {
 
+    Route::post('login', [AuthController::class, 'login']);
     Route::post('logout', [AuthController::class, 'logout']);
+    Route::post('password/reset', [AuthController::class, 'resetPassword']);
+    Route::post('register', [AuthController::class, 'register']);
+
 
     Route::put('/users/{user}', [UserController::class, 'update']);
-    Route::get('/users', [UserController::class, 'index']);
-    Route::delete('/users/{user}', [UserController::class, 'destroy']);
     Route::get('/users/{user}', [UserController::class, 'show']);
-    Route::post('/users', [UserController::class, 'store']);
 
-    Route::get('/roles', [RoleController::class, 'index']);
-    Route::put('/roles/{role}', [RoleController::class, 'update']);
-    Route::delete('/roles/{role}', [RoleController::class, 'destroy']);
-    Route::post('/roles', [RoleController::class, 'store']);
-
-    Route::post('/subscriptions', [SubscriptionController::class, 'store']);
-    Route::get('/subscriptions', [SubscriptionController::class, 'index']);
     Route::put('/subscriptions/{subscription}', [SubscriptionController::class, 'update']);
-    Route::delete('/subscriptions/{subscription}', [SubscriptionController::class, 'destroy']);
+
 
 });

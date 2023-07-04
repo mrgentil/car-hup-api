@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
@@ -23,46 +24,7 @@ class UserController extends Controller
         return response()->json($users, 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required',
-            'phone' => 'required',
-            'first_name' => 'required',
-            'address' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required',
-            'avatar' => 'image|max:2048',
-//            'role_id' => 'required|exists:roles,id',
-//            'subscription_id' => 'required|exists:subscriptions,id',
-        ]);
 
-        $data = $request->all();
-
-        if ($request->hasFile('avatar')) {
-            $file = $request->file('avatar');
-            $path = $file->store('avatar', 'public');
-            $data['avatar'] = $path;
-        }
-        $role = Role::where('name', 'Simple Client')->first();
-        $subscription = Subscription::where('name', 'Basic')->first();
-        $data['role_id'] = $role->id;
-        $data['subscription_id'] = $subscription->id;
-        $user = User::create($data);
-       $user->roles()->attach($role);
-       $user->subscriptions()->attach($subscription);
-        Mail::to($user->email)->queue(new WelcomeEmail($user));
-        $token =  $user->createToken($user->email . '_Token')->plainTextToken;
-        return response()->json([
-            'status' => 200,
-            'username' => $user->email,
-            'token' => $token,
-            'message' => 'Register Successfully'
-        ]);
-    }
 
     /**
      * Display the specified resource.
