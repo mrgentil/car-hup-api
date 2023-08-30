@@ -18,9 +18,6 @@
                 </div>
                 <div class="author-bio">
                     <h4 class="author__title">{{auth()->user()->name}}</h4>
-                    <span class="author__meta">
-                        Membre depuis {{$month}} {{$formattedDate}}
-                    </span>
                 </div>
             </div>
         </div>
@@ -54,8 +51,8 @@
                                     class="la la-user mr-2 text-color-2"></i>Utilisateurs</a></li>
                         <li class=""><a href="user-dashboard-reviews.html"><i class="la la-star mr-2 text-color-3"></i>My
                                 Reviews</a></li>
-                        <li class=""><a href="user-dashboard-wishlist.html"><i
-                                    class="la la-heart mr-2 text-color-4"></i>Wishlist</a></li>
+                        <li class="{{ Request::is('cars') ? 'active' : '' }}"><a href="{{route('cars.index')}}"><i
+                                    class="la la-car-side mr-2 text-color-4"></i>Voitures</a></li>
                         <li class=""><a href="user-dashboard-settings.html"><i class="la la-cog mr-2 text-color-5"></i>Settings</a>
                         </li>
                         <li class=""><a href="javascript:void(0)" onclick="event.preventDefault();

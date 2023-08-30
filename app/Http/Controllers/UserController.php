@@ -27,13 +27,9 @@ class UserController extends Controller
 
     public function index()
     {
-        setlocale(LC_TIME, 'fr_FR');
-        $user = auth()->user();
-        $inscriptionDate = Carbon::parse($user->created_at);
-        $month = $inscriptionDate->format('F');
-        $formattedDate = $inscriptionDate->format('Y');
+
         $users = User::paginate(15);
-        return view('users.index', compact('users', 'month', 'formattedDate'));
+        return view('users.index', compact('users', ));
     }
 
     public function updateStatus(User $user): \Illuminate\Http\RedirectResponse
@@ -54,15 +50,11 @@ class UserController extends Controller
 
     public function search(Request $request): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
-        setlocale(LC_TIME, 'fr_FR');
-        $user = auth()->user();
-        $inscriptionDate = Carbon::parse($user->created_at);
-        $month = $inscriptionDate->format('F');
-        $formattedDate = $inscriptionDate->format('Y');
+
         $name = $request->input('name');
         $results = User::where('name', 'LIKE', "%$name%")->get();
 
-        return view('search', compact('results', 'month', 'formattedDate'));
+        return view('search', compact('results'));
     }
 
 }

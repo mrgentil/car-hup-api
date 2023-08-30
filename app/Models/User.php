@@ -7,6 +7,7 @@ use App\Mail\WelcomeEmail;
 
 //use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Mail;
@@ -71,6 +72,11 @@ class  User extends Authenticatable implements JWTSubject
     public function role(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Role::class);
+    }
+
+    public function cars(): HasMany
+    {
+        return $this->hasMany(Car::class);
     }
 
     public function subscription(): \Illuminate\Database\Eloquent\Relations\BelongsTo

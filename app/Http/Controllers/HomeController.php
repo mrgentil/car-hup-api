@@ -25,13 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //dd(auth()->user()->role->name);
-        setlocale(LC_TIME, 'fr_FR');
-        $user = auth()->user();
-        $inscriptionDate = Carbon::parse($user->created_at);
-        $month = $inscriptionDate->format('F');
-        $formattedDate = $inscriptionDate->format('Y');
 
-        return view('home', compact('formattedDate', 'month'));
+
+        return view('home', );
     }
 }
